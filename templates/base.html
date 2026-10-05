@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Parc Logic</title>
+    <style>
+       
+   body { 
+    margin: 0; font-family: 'Segoe UI', sans-serif; display: flex; 
+    background: linear-gradient(135deg, #1e293b 0%, #059669 100%); 
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(135deg, #0c3155, #064e3b);
+    position: fixed;
+    left: 0;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.sidebar.hidden { transform: translateX(-250px); }
+
+/* Définition unique et correcte de .content */
+.content { 
+    margin-left: 250px; 
+    padding: 40px; 
+    width: calc(100% - 250px); 
+    transition: margin-left 0.3s ease; 
+}
+
+.content.full { 
+    margin-left: 0; 
+    width: 100%;
+}
+
+.sidebar h1 {font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    color: #067b45;
+     margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid rgb(5, 92, 57);
+    text-transform: uppercase;
+    letter-spacing: 1px; 
+
+
+    display: block;
+    
+    
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: 500;}
+
+.sidebar a { 
+    display: block; color: #94a3b8; padding: 15px; 
+    text-decoration: none; border-radius: 8px; margin: 0 10px 10px 10px;
+    transition: 0.3s;
+}
+
+.sidebar a:hover { background: #1e293b; color: #fff; }
+
+.logout { margin-top: 50px; color: #ef4444 !important; 
+    display: block;
+    padding: 12px 15px;
+   
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: 500;}
+/* تنسيق الحاوية الأساسية */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* القائمة المنسدلة (مخفية افتراضياً) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #064e3b; /* نفس لون الـ Sidebar تقريباً */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* إظهار القائمة عند تمرير الفأرة */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+/* تنسيق الروابط داخل القائمة */
+.dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #059669;
+}
+/* الزر الرئيسي للقائمة */
+.export-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin: 10px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* الأزرار داخل القائمة */
+.export-item {
+    padding: 10px 20px !important;
+    margin: 5px !important;
+    border-radius: 8px !important;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.3s ease !important;
+}
+
+/* ألوان مميزة لكل نوع */
+.csv { background: #6b7280; }
+.csv:hover { background: #4b5563; }
+
+.xlsx { background: #16a34a; }
+.xlsx:hover { background: #15803d; }
+
+.pdf { background: #dc2626; }
+.pdf:hover { background: #b91c1c; }
+
+/* تأثير بسيط عند الظهور */
+.dropdown-content {
+    border-radius: 12px;
+    padding: 5px;
+    background: #1e293b !important;
+}
+button {
+        background-color: #059669;
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background 0.3s;
+    }
+    </style>
+</head>
+<body>
+    <button onclick="toggleMenu()" style="position: fixed; top: 5px; left: 10px; z-index: 1001;color:#0e8c5e;background-color: #eeeeee;">
+    ☰ Menu
+</button>
+    <nav class="sidebar">
+        <br><br><br>
+    <b><h1 >Parck informatique</h1></b>
+    
+    <a href="{{ url_for('dashboard') }}" style="display: block;
+    padding: 12px 15px;
+    color: #ebf6f1; 
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: 500;">Dashboard</a>
+    <a href="{{ url_for('liste_machines') }}" style="display: block;
+    padding: 12px 15px;
+    color: #ebf6f1; 
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: 500;">Inventaire & Recherche</a>
+    <a href="{{ url_for('ajouter') }}" style="display: block;
+    padding: 12px 15px;
+    color: #ebf6f1; 
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: 500;">Ajouter une machine</a>
+    
+
+    <div class="dropdown">
+        <a href="#" class="export-btn" style="display: block;
+    padding: 12px 15px;
+    color: #ebf6f1; 
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: 500;">Exporter ▼</a>
+        <div class="dropdown-content">
+            <a href="{{ url_for('export_csv') }}" class="export-item csv">CSV</a>
+            <a href="{{ url_for('export_excel') }}" class="export-item xlsx">Excel</a>
+            <a href="{{ url_for('export_pdf') }}" class="export-item pdf">PDF</a>
+        </div>
+    </div> <a href="{{ url_for('statistiques') }}" style="display: block;
+    padding: 12px 15px;
+    color: #ebf6f1; 
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.3s;
+    font-weight: 500;">Statistiques Avancées</a>
+    <a href="{{ url_for('corbeille') }}" style="display: block; padding: 12px 15px; color: #ebf6f1; text-decoration: none; border-radius: 8px; transition: 0.3s; font-weight: 500;">Corbeille</a>
+    <a href="#" onclick="window.print(); return false;" style="display: block; padding: 12px 15px; color: #ebf6f1; text-decoration: none; border-radius: 8px; transition: 0.3s; font-weight: 500;">Imprimer</a>
+    <a href="{{ url_for('logout') }}" class="logout" >Déconnexion</a>
+</nav>
+
+    <main class="content">
+        {% block content %}{% endblock %}
+    </main>
+    <script>
+    function toggleMenu() {
+        const sidebar = document.querySelector('.sidebar');
+        const content = document.querySelector('.content');
+        
+        sidebar.classList.toggle('hidden');
+        content.classList.toggle('full');
+    }
+</script>
+</body>
+</html>

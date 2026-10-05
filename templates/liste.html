@@ -1,0 +1,135 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    /* Le conteneur principal qui donne l'effet de carte */
+      :root {
+            /* Palette Emerald Sophisticated */
+            --primary: #059669; 
+            --bg-dark: #125c33; 
+            --text-charcoal: #1f2937;
+            --bg-white: #fbfffe;
+            --bg-table-head: #d9f9e7;
+        }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: linear-gradient(135deg, #1e293b, #10b981); min-height: 100vh; display: flex; flex-direction: column; }
+    
+    
+        .container { max-width: 1100px; margin: 20px auto; padding: 0 20px; }
+    h1 { text-align: center;color: rgb(255, 254, 254); font-size: 2.5rem; margin-bottom: 1.5rem; }
+     p{font-size: medium;color:white;text-align: center;}
+
+    
+     .search-box { 
+            background: rgb(140, 198, 159); 
+            padding: 20px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 25px; 
+            display: flex; 
+            gap: 10px; 
+        }
+        input { padding: 10px 15px; border: 1px solid #D1D5DB; border-radius: 8px; flex-grow: 1; }
+        .btn-search { background: var(--primary); color: white; border: none; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .btn-search:hover { background: #047857; }
+
+
+
+
+
+
+
+.table-container { 
+        background: var(--bg-white);
+        border-radius: 12px; 
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); 
+        overflow-x: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .table-container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+
+    th { 
+        background-color: var(--bg-table-head);
+        color: #064e3b; 
+        padding: 18px 15px; 
+        font-size: 0.7rem; 
+        text-transform: uppercase; 
+        text-align: left;
+    }
+    .container { max-width: 95%; margin: 20px auto; padding: 0 20px; }
+
+    td { padding: 15px; border-bottom: 1px solid #e5e7eb; font-size: 0.85rem; color: #374151; }
+    tr:hover { background-color: #f0fdf4; }
+</style>
+
+
+
+<div class="container">
+    <h1>Inventaire des Machines</h1>
+
+
+
+
+    <div class="search-box">
+        <form action="/liste" method="GET" style="display: flex; gap: 10px; width: 100%;">
+            <input type="text" name="search" placeholder="Rechercher..." value="{{ search }}">
+            <button type="submit" style="background: #059669; color: white; border: none; padding: 10px 20px; border-radius: 5px;">Rechercher</button>
+            <a href="/liste" style="padding: 10px; color: #059669; text-decoration: none;">Réinitialiser</a>
+        </form>
+    </div>
+
+
+
+
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Département</th>
+                <th>Utilisateur</th>
+                <th>T.Ord</th>
+                <th>M.Ord</th>
+                <th>T.Ecran</th>
+                <th>M.Ecran</th>
+                <th>RAM</th>
+                <th>CPU</th>
+                <th>IP</th>
+                <th>MAC</th>
+                <th>Système</th>
+                <th>Actions</th> </tr>
+        </thead>
+        <tbody>
+            {% for m in machines %}
+            <tr>
+                <td>{{ m.id }}</td>
+                <td>{{ m.nom_departement }}</td>
+                <td>{{ m.utilisateur }}</td>
+                <td>{{ m.type_ordinateur }}</td>
+                <td>{{ m.marque_ordinateur }}</td>
+                <td>{{ m.type_ecran }}</td>
+                <td>{{ m.marque_ecran }}</td>
+                <td>{{ m.ram }}</td>
+                <td>{{ m.cpu_processeur }}</td>
+                <td>{{ m.adresse_ip }}</td>
+                <td>{{ m.adresse_mac }}</td>
+                <td>{{ m.systeme_exploitation }}</td>
+                
+                <td style="display: flex; gap: 5px;">
+                    <a href="{{ url_for('modifier', id=m.id) }}" style="background: #3b82f6; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; font-size: 0.75rem;">Mod</a>
+                    
+                          <a href="{{ url_for('supprimer_machine', id=m.id) }}"  
+   style="background: #ef4444; color: white; padding: 5px 10px; text-decoration: none; border-radius: 4px; font-size: 0.75rem;" >Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div></div>
+{% endblock %}

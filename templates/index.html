@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestion Parc | Dashboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+        :root { --primary: #10b981; --primary-hover: #059669; --text-dark: #1f2937; --card-bg: #ffffff; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: linear-gradient(135deg, #1e293b, #10b981); min-height: 100vh; display: flex; flex-direction: column; }
+        .header-title { position: absolute; top: 20px; left: 30px; color: white; font-weight: bold; font-size: 2rem; }
+        nav { position: absolute; top: 20px; right: 30px; display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+        .nav-links a { color: white; text-decoration: none; font-weight: 600; padding: 10px 20px; background: rgba(255, 255, 255, 0.2); border-radius: 8px; transition: 0.3s; width: 100px; text-align: center; }
+        .nav-links a:hover { background: rgba(255, 255, 255, 0.4); }
+        .main-container { flex-grow: 1; display: flex; justify-content: center; align-items: center; padding: 100px 20px 20px 20px; }
+        .card { background: var(--card-bg); padding: 2rem; border-radius: 16px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); width: 100%; max-width: 800px; }
+        h2 { margin-bottom: 1.5rem; color: var(--text-dark); text-align: center; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .field { margin-bottom: 1rem; }
+        label { display: block; margin-bottom: 0.3rem; font-size: 0.85rem; color: #6b7280; font-weight: 600; }
+        input, select, textarea { width: 100%; padding: 10px; border: 1.5px solid #e5e7eb; border-radius: 8px; box-sizing: border-box; outline: none; }
+        button { width: 100%; padding: 14px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; margin-top: 10px; }
+        button:hover { background: var(--primary-hover); }
+
+
+             /* تصميم الحقول بشكل عصري */
+input, select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease; /* تأثير انسيابي عند الضغط */
+}
+
+input:focus {
+    border-color: #10b981;
+    outline: none;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
+}
+
+/* تحسين زر الإرسال */
+button {
+    background: #10b981;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+    </style>
+</head>
+<body>
+
+    <div class="header-title">Parc informatique</div>
+
+    <nav>
+        <div class="nav-links">
+            <a href="/">Ajouter</a>
+            <a href="/liste">Inventaire</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="card">
+            <h2>Ajouter une Machine</h2>
+            <form method="POST">
+                <div class="form-grid">
+                    <div class="field">
+                        <label>Département & Service</label>
+<select name="emplacement" required>
+    
+    <optgroup label="Dpt Administratif et Financier">
+        <option value="Admin - Svc Achat">Svc Achat</option>
+        <option value="Admin - Svc Comptabilité">Svc Comptabilité</option>
+        <option value="Admin - Svc Informatique">Svc Informatique</option>
+        <option value="Admin - Svc Approvisionnement">Svc Approvisionnement</option>
+        <option value="Admin - Svc Trésorerie">Svc Trésorerie</option>
+    </optgroup>
+
+    <optgroup label="Dpt Commercial">
+        <option value="Comm - Svc Admin des Ventes">Svc Admin des Ventes</option>
+        <option value="Comm - Svc Gestion des Ventes">Svc Gestion des Ventes</option>
+        <option value="Comm - Svc Marketing">Svc Marketing</option>
+    </optgroup>
+
+    <optgroup label="Dpt Ressources Humaines">
+        <option value="RH - Svc Prestations Sociales">Svc Prestations Sociales</option>
+        <option value="RH - Svc Paie">Svc Paie</option>
+        <option value="RH - Svc Médical">Svc Médical</option>
+    </optgroup>
+
+    <optgroup label="Dpt Fabrication">
+        <option value="Fab - Svc Conditionnement">Svc Conditionnement</option>
+        <option value="Fab - Svc Laboratoire">Svc Laboratoire</option>
+        <option value="Fab - Svc Ordonnancement">Svc Ordonnancement</option>
+        <option value="Fab - Svc Process">Svc Process</option>
+    </optgroup>
+
+    <optgroup label="Dpt Maintenance">
+        <option value="Maint - Svc Maint Industrielle">Svc Maint Industrielle</option>
+        <option value="Maint - Svc Maint Parc Auto">Svc Maint Parc Auto</option>
+        <option value="Maint - Svc Travaux Neufs">Svc Travaux Neufs</option>
+    </optgroup>
+
+    <optgroup label="Dpt Production">
+        <option value="Prod - Svc Collecte Lait">Svc Collecte Lait</option>
+        <option value="Prod - Svc Valorisation">Svc Valorisation</option>
+        <option value="Prod - Svc Fabrication AB">Svc Fabrication AB</option>
+    </optgroup>
+
+    <optgroup label="Dpt Qualité">
+        <option value="Qualité - Svc Contrôle MP et EM">Svc Contrôle MP et EM</option>
+        <option value="Qualité - Svc Gestion Qualité">Svc Gestion Qualité</option>
+        <option value="Qualité - Svc Hygiène">Svc Hygiène</option>
+    </optgroup>
+
+</select>
+                    </div>
+                    <div class="field"><label>Utilisateur</label><input type="text" name="utilisateur"></div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="field"><label>Type Ordinateur</label><input type="text" name="type_ordinateur"></div>
+                    <div class="field"><label>Marque Ordinateur</label><input type="text" name="marque_ordinateur"></div>
+                    <div class="field"><label>Type Écran</label><input type="text" name="type_ecran"></div>
+                    <div class="field"><label>Marque Écran</label><input type="text" name="marque_ecran"></div>
+                    <div class="field"><label>Marque Clavier</label><input type="text" name="marque_clavier"></div>
+                    <div class="field"><label>Marque Souris</label><input type="text" name="marque_souris"></div>
+                    <div class="field"><label>RAM</label><input type="text" name="ram"></div>
+                    <div class="field"><label>CPU Processeur</label><input type="text" name="processeur"></div>
+                    <div class="field"><label>Disc Dur</label><input type="text" name="disc_dur"></div>
+                    <div class="field"><label>Antivirus</label><input type="text" name="antivirus"></div>
+                    <div class="field"><label>Lecteur CD</label><input type="text" name="lecteur_cd"></div>
+                    <div class="field"><label>Imprimante</label><input type="text" name="imprimante"></div>
+                    <div class="field"><label>Adresse IP</label><input type="text" name="adresse_ip"></div>
+                    <div class="field"><label>Adresse MAC</label><input type="text" name="adresse_mac"></div>
+                    <div class="field"><label>Système d'Exploitation</label><input type="text" name="systeme_exploitation"></div>
+                    <div class="field"><label>Date d'achat</label><input type="date" name="date_achat"></div>
+                </div>
+
+                <div class="field">
+                    <label>Observation</label>
+                    <textarea name="observation" rows="3"></textarea>
+                </div>
+
+                <button type="submit">Enregistrer la machine</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

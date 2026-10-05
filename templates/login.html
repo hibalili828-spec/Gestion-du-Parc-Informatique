@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion - Parc Logic</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+            background: #0f172a;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .art-side {
+            flex: 1;
+            position: relative;
+            background: #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .blob {
+            position: absolute;
+            width: 400px; height: 400px;
+            background: linear-gradient(135deg, #10b981, #064e3b);
+            filter: blur(80px);
+            border-radius: 50%;
+            animation: move 8s infinite alternate;
+        }
+
+        @keyframes move {
+            from { transform: translate(-20%, -20%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        .login-side {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: NONE;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-left: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .login-box { width: 300px; color: white;font-size:30px ; }
+
+        .input-field {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #10b981;
+            padding: 15px 0;
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 15px;
+            background: #10b981;
+            border: none;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn-submit:hover { background: #059669; transform: translateY(-3px); }
+          /* Désactiver le fond imposé par le remplissage automatique du navigateur */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #0f172a inset !important; /* Force la couleur de fond */
+    -webkit-text-fill-color: white !important; /* Force la couleur du texte */
+    transition: background-color 5000s ease-in-out 0s;
+}
+        @media (max-width: 768px) { .container { flex-direction: column; } }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="art-side">
+            <div class="blob"></div>
+            <h1 style="color: white; z-index: 2; font-size: 3rem;">PARCK<br><span style="color: #10b981;">INFORMATIQUE</span></h1>
+        </div>
+
+        <div class="login-side">
+            <div class="login-box">
+                <h2>Connexion</h2>
+                
+                <form  action="{{ url_for('login') }}" method="POST">
+                    <input type="text" name="username" class="input-field" placeholder="ID Utilisateur" required autocomplete="off">
+                    <input type="password" name="password" class="input-field" placeholder="Mot de passe" required autocomplete="off">
+                    <button type="submit" class="btn-submit">Se connecter</button>
+                     <BR>
+                        <button type="reset" style="background: transparent; border: 1px solid #041d15; color: #10b981; padding: 10px; width: 100%; margin-top: 10px; cursor: pointer; border-radius: 5px;">
+    Effacer les champs
+</button></form>
+                    
+
+
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div style="color: #ff4d4d; margin-top: 20px; text-align: center; font-weight: bold;">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

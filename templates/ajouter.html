@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .form-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 40px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        max-width: 900px;
+        margin: 20px auto;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    }
+
+    h1 { color: #fff; text-align: center; margin-bottom: 30px; font-weight: 300; }
+
+    /* Grille pour organiser les champs */
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Deux colonnes */
+        gap: 20px;
+    }
+
+    .field-group { display: flex; flex-direction: column; }
+    
+    label { color: #d1d5db; margin-bottom: 8px; font-size: 0.9rem; }
+
+    input {
+        padding: 15px;
+        border-radius: 12px;
+        border: none;
+        background: rgba(255, 255, 255, 0.9);
+        font-size: 1rem;
+    }
+
+    .btn-submit {
+        grid-column: span 2; /* Le bouton prend toute la largeur */
+        background: #10b981;
+        color: white;
+        padding: 18px;
+        border-radius: 12px;
+        border: none;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+
+    
+
+    .btn-submit:hover { background: #059669; transform: scale(1.02); }
+</style>
+
+<div class="form-card">
+    <h1>Ajouter une nouvelle machine</h1>
+    
+    <form action="/ajouter" method="POST">
+        <div class="form-grid">
+            
+            <div class="field-group" style="grid-column: span 2;">
+                <label>Département / Service</label>
+                 <select name="departement_id" required style="padding: 15px; border-radius: 12px; border: none; background: rgba(255, 255, 255, 0.9);">
+
+       
+
+        <option value="" disabled selected>Choisissez le département et le service...</option>
+
+        {% for s in services %}
+
+            <option value="{{ s.id }}">{{ s.nom_departement }} - {{ s.nom_service }}</option>
+
+        {% endfor %}
+
+    </select>
+            </div>
+
+            <div class="field-group"><label>Utilisateur</label><input type="text" name="utilisateur" required></div>
+            <div class="field-group"><label>Type Ordinateur</label><input type="text" name="type_ordinateur"></div>
+            <div class="field-group"><label>Marque Ordinateur</label><input type="text" name="marque_ordinateur"></div>
+            <div class="field-group"><label>Type Écran</label><input type="text" name="type_ecran"></div>
+            <div class="field-group"><label>Marque Écran</label><input type="text" name="marque_ecran"></div>
+            <div class="field-group"><label>RAM</label><input type="text" name="ram"></div>
+            <div class="field-group"><label>CPU</label><input type="text" name="cpu_processeur"></div>
+            <div class="field-group"><label>Adresse IP</label><input type="text" name="adresse_ip"></div>
+            <div class="field-group"><label>Adresse MAC</label><input type="text" name="adresse_mac"></div>
+            <div class="field-group" ><label>Système d'exploitation</label><input type="text" name="systeme_exploitation"></div>
+            
+            <button type="submit" class="btn-submit">Enregistrer la machine</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

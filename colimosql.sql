@@ -1,0 +1,20 @@
+INSERT INTO machine (departement_id, utilisateur, type_ordinateur, marque_ordinateur, type_ecran, marque_ecran, ram, cpu_processeur, adresse_ip, adresse_mac, systeme_exploitation)
+VALUES 
+(1, 'Ahmed Alaoui', 'PC Portable', 'HP', 'LCD', 'Dell', '8GB', 'i5', '192.168.1.1', 'AA:BB:CC:00:01', 'Windows 10'),
+(1, 'Fatima Zahra', 'PC Fixe', 'Dell', 'LED', 'HP', '16GB', 'i7', '192.168.1.2', 'AA:BB:CC:00:02', 'Windows 11'),
+(1, 'Karim Tazi', 'PC Portable', 'Lenovo', 'LCD', 'Samsung', '8GB', 'i3', '192.168.1.3', 'AA:BB:CC:00:03', 'Windows 10'),
+(1, 'Laila Mansouri', 'PC Fixe', 'HP', 'LED', 'Dell', '4GB', 'i5', '192.168.1.4', 'AA:BB:CC:00:04', 'Windows 10'),
+(1, 'Youssef Benani', 'PC Portable', 'Asus', 'LCD', 'Asus', '8GB', 'i5', '192.168.1.5', 'AA:BB:CC:00:05', 'Windows 11'),
+(1, 'Sofia El Amri', 'PC Portable', 'HP', 'LCD', 'Dell', '16GB', 'i7', '192.168.1.6', 'AA:BB:CC:00:06', 'Windows 10'),
+(1, 'Omar Fassi', 'PC Fixe', 'Dell', 'LED', 'HP', '8GB', 'i5', '192.168.1.7', 'AA:BB:CC:00:07', 'Windows 10'),
+(1, 'Nadia Idrissi', 'PC Portable', 'Lenovo', 'LCD', 'Samsung', '16GB', 'i7', '192.168.1.8', 'AA:BB:CC:00:08', 'Windows 11'),
+(1, 'Mehdi Chraibi', 'PC Fixe', 'HP', 'LED', 'Dell', '8GB', 'i5', '192.168.1.9', 'AA:BB:CC:00:09', 'Windows 10'),
+(1, 'Salma Jbilou', 'PC Portable', 'Asus', 'LCD', 'Asus', '4GB', 'i3', '192.168.1.10', 'AA:BB:CC:00:10', 'Windows 10'),
+(1, 'Reda Hajjami', 'PC Portable', 'HP', 'LCD', 'Dell', '8GB', 'i5', '192.168.1.11', 'AA:BB:CC:00:11', 'Windows 11'),
+(1, 'Houda Belhaj', 'PC Fixe', 'Dell', 'LED', 'HP', '16GB', 'i7', '192.168.1.12', 'AA:BB:CC:00:12', 'Windows 10'),
+(1, 'Amine Slaoui', 'PC Portable', 'Lenovo', 'LCD', 'Samsung', '8GB', 'i5', '192.168.1.13', 'AA:BB:CC:00:13', 'Windows 10'),
+(1, 'Sara El Ouardi', 'PC Fixe', 'HP', 'LED', 'Dell', '8GB', 'i5', '192.168.1.14', 'AA:BB:CC:00:14', 'Windows 11'),
+(1, 'Hamza Zouhair', 'PC Portable', 'Asus', 'LCD', 'Asus', '16GB', 'i7', '192.168.1.15', 'AA:BB:CC:00:15', 'Windows 10'),
+(1, 'Zineb Rachidi', 'PC Portable', 'HP', 'LCD', 'Dell', '8GB', 'i5', '192.168.1.16', 'AA:BB:CC:00:16', 'Windows 10'),
+(1, 'Tarik Kadiri', 'PC Fixe', 'Dell', 'LED', 'HP', '8GB', 'i5', '192.168.1.17', 'AA:BB:CC:00:17', 'Windows 11'),
+(1, 'Meryem Amrani', 'PC Portable', 'Lenovo', 'LCD', 'Samsung', '16GB', 'i7', '192.168.1.18', 'AA:BB:CC:00:18', 'Windows 10');

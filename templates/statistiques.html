@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<div style="background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 90%; max-width: 500px; margin: 50px auto; text-align: center;">
+    <h2 style="color: #059669; margin-bottom: 25px; font-family: sans-serif;">Statistiques du Parc</h2>
+    
+    <!-- On réduit la taille du conteneur du graphique ici -->
+    <div style="width: 100%; height: 300px;">
+        <canvas id="myChart"></canvas>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: {{ labels | safe }},
+            datasets: [{
+                data: {{ values | safe }},
+                backgroundColor: ['#059669', '#3b82f6', '#f59e0b', '#ef4444'],
+                hoverOffset: 10 // Petit effet sympa quand on survole
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false, // Très important pour contrôler la taille
+            plugins: {
+                legend: { 
+                    position: 'bottom',
+                    labels: { padding: 20, font: { size: 14 } }
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

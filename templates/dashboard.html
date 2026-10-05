@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+/* 1. تنسيق البطاقات (Cards) */
+.stats-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+.card {
+    /* تدرج لوني أخضر فخم */
+    background: linear-gradient(135deg, #065f46 0%, #064e3b 100%);
+    padding: 25px;
+    border-radius: 20px; /* أطراف دائرية أكتر */
+    color: #ffffff;
+    text-align: center;
+    min-width: 170px;
+    /* إضافة حدود خفيفة جداً لتعطي طابع Glassmorphism */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.card h3 { 
+    margin: 0; 
+    font-size: 0.85rem; 
+    opacity: 0.9; 
+    text-transform: uppercase; 
+    letter-spacing: 1.5px; /* مسافة بين الحروف */
+    margin-bottom: 10px;
+}
+
+.card p { 
+    font-size: 2.5rem; 
+    font-weight: 800; 
+    margin: 0; 
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2); /* إضافة ظل خفيف للرقم */
+}
+/* 2. تنسيق شريط الإحصائيات (Chart Box) */
+.chart-box {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 16px;
+    color: #333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.chart-box h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.2rem;
+    color: #064e3b;
+}
+
+.bar-container { 
+    background: #e2e8f0; /* رمادي فاتح جداً للخلفية */
+    border-radius: 12px;
+    height: 28px;
+    overflow: hidden;
+}
+
+.bar {
+    height: 100%;
+   
+    background: linear-gradient(135deg, #065f46 0%, #064e3b 100%); /* تدرج أخضر عصري */
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 1.5s ease-in-out;
+}
+
+.bar-text {
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+</style>
+
+<h1 style="color: #dce0e7; text-align: center; margin-bottom: 30px;">DASHBOARD</h1>
+
+<div class="stats-grid">
+    {% for stat in stats_types %}
+        <div class="card">
+            <h3>{{ stat.type_ordinateur }}</h3>
+            <p>{{ stat.count }}</p>
+        </div>
+    {% endfor %}
+</div>
+
+<div class="chart-box">
+    <h3>Nombre total des machines :</h3>
+    <div class="bar-container">
+        <div class="bar" style="width: 100%;">
+            <span class="bar-text">{{ total_machines }} Unités</span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

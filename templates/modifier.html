@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    /* تنسيق الحاوية الرئيسية */
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 { color: #059669; text-align: center; margin-bottom: 25px; }
+
+    /* تنسيق الفورم والحقول */
+    form { display: grid; gap: 15px; }
+    
+    label { font-weight: 600; color: #a7d3c5; display: block; margin-bottom: 5px; }
+    
+    input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #dddddd;
+        border-radius: 6px;
+        font-size: 16px;
+        box-sizing: border-box; /* لضمان عدم خروج الحقول عن الإطار */
+    }
+
+    /* تنسيق زر الحفظ */
+    button {
+        background-color: #059669;
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background 0.3s;
+    }
+
+    button:hover { background-color: #047857; }
+</style>
+
+<h1>Modifier la machine id={{ m.id }}</h1>
+<form action="{{ url_for('modifier', id=m.id) }}" method="POST">
+   <div class="full-width">
+            <label>Département / Service:</label>
+            <select name="departement_id" style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #ddd; font-size: 16px;">
+                {% for s in services %}
+                    <option value="{{ s.id }}" {% if s.id == m.departement_id %}selected{% endif %}>
+                        {{ s.nom_departement }} - {{ s.nom_service }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+
+
+    
+    <label>Utilisateur:</label> <input type="text" name="utilisateur" value="{{ m.utilisateur }}">
+    <label>Type Ord:</label> <input type="text" name="type_ordinateur" value="{{ m.type_ordinateur }}">
+    <label>Marque Ord:</label> <input type="text" name="marque_ordinateur" value="{{ m.marque_ordinateur }}">
+    <label>Type Ecran:</label> <input type="text" name="type_ecran" value="{{ m.type_ecran }}">
+    <label>Marque Ecran:</label> <input type="text" name="marque_ecran" value="{{ m.marque_ecran }}">
+    <label>RAM:</label> <input type="text" name="ram" value="{{ m.ram }}">
+    <label>CPU:</label> <input type="text" name="cpu_processeur" value="{{ m.cpu_processeur }}">
+    <label>Adresse IP:</label> <input type="text" name="adresse_ip" value="{{ m.adresse_ip }}">
+    <label>Adresse MAC:</label> <input type="text" name="adresse_mac" value="{{ m.adresse_mac }}">
+    <label>Système:</label> <input type="text" name="systeme_exploitation" value="{{ m.systeme_exploitation }}">
+    
+    <button type="submit">Enregistrer les modifications</button>
+</form>
+{% endblock %}
