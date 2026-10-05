@@ -28,7 +28,7 @@ Cette interface permet de consulter et de rechercher les équipements informatiq
 
 Cette page permet de visualiser les statistiques liées aux équipements du parc informatique.
 
-![Statistiques](screenshots/statiques.png)
+![Statistiques](screenshots/statistiques.png)
 
 ---
 
